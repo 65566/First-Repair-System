@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نظام إدارة الصيانة</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <section class="login-page" id="portalPage">
+    <div class="login-box">
+      <h1>نظام إدارة الصيانة</h1>
+      <p>اختر القسم الذي تريد الدخول إليه</p>
+      <div class="actions center">
+        <button class="btn btn-primary" onclick="openSectionLogin('controllers')">صيانة دراعات</button>
+        <button class="btn btn-secondary" onclick="openSectionLogin('devices')">صيانة أجهزة</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="login-page hidden" id="loginPage">
+    <div class="login-box">
+      <h1 id="loginTitle">تسجيل الدخول</h1>
+      <p id="loginSubtitle">ادخل بيانات المستخدم</p>
+      <div class="form-group">
+        <label for="loginUser">الاسم</label>
+        <select id="loginUser"></select>
+      </div>
+      <div class="form-group">
+        <label for="loginRole">الكنية</label>
+        <select id="loginRole">
+          <option value="">اختر الكنية</option>
+          <option value="مدير">مدير</option>
+          <option value="موظف">موظف</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">الباسورد</label>
+        <input type="password" id="loginPassword" placeholder="اكتب الباسورد" />
+      </div>
+      <div class="actions">
+        <button class="btn btn-secondary" onclick="backToPortal()">رجوع</button>
+        <button class="btn btn-primary full-width" onclick="login()">دخول</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="app-layout hidden" id="appLayout">
+    <aside class="sidebar">
+      <div class="brand">
+        <h2 id="systemName">نظام الصيانة</h2>
+        <span id="systemSubName">Repair System</span>
+      </div>
+      <div class="menu" id="mainMenu">
+        <button class="active" onclick="showPage('home', this)">الصفحة الرئيسية</button>
+        <button data-controllers onclick="showPage('new-invoice', this)">فاتورة جديدة</button>
+        <button data-controllers onclick="showPage('edit-invoice', this)">تعديل فواتير</button>
+        <button data-controllers onclick="showPage('customers', this)">حسابات العملاء</button>
+        <button data-controllers onclick="showPage('inventory', this)">المخزون</button>
+        <button data-controllers onclick="showPage('invoices', this)">إدارة الفواتير</button>
+        <button data-controllers onclick="showPage('reports', this)">التقارير</button>
+        <button onclick="showPage('users', this)">إدارة المستخدمون</button>
+        <button class="logout-btn" onclick="logout()">تسجيل الخروج</button>
+      </div>
+    </aside>
+    <main class="main-content">
+      <div class="topbar">
+        <div>
+          <h3 id="pageTitle">الصفحة الرئيسية</h3>
+          <p id="pageDesc">مرحبا بك في النظام</p>
+        </div>
+        <div class="user-badge" id="userBadge">User: -</div>
+      </div>
+      <div id="homeSection" class="cards-grid"></div>
+      <div id="placeholderSection" class="page-placeholder hidden">
+        <h2 id="placeholderTitle">عنوان الصفحة</h2>
+        <p id="placeholderText">تم تجهيز الربط مع Supabase.</p>
+      </div>
+    </main>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
